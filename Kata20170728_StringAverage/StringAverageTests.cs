@@ -38,6 +38,14 @@ namespace Kata20170728_StringAverage
             var actual = kata.AverageString("three four");
             Assert.AreEqual("three", actual);
         }
+
+        [TestMethod]
+        public void input_zero_nine_five_two_should_return_four()
+        {
+            var kata = new Kata();
+            var actual = kata.AverageString("zero nine five two");
+            Assert.AreEqual("four", actual);
+        }
     }
 
     public class Kata
@@ -48,7 +56,12 @@ namespace Kata20170728_StringAverage
             {"one", 1},
             {"two", 2},
             {"three", 3},
-            {"four", 4}
+            {"four", 4},
+            {"five", 5},
+            {"six", 6},
+            {"seven", 7},
+            {"eight", 8},
+            {"nine", 9}
         };
 
         private readonly Dictionary<int, string> dicNumToStr = new Dictionary<int, string>
@@ -57,7 +70,12 @@ namespace Kata20170728_StringAverage
             {1, "one"},
             {2, "two"},
             {3, "three"},
-            {4, "four"}
+            {4, "four"},
+            {5, "five"},
+            {6, "six"},
+            {7, "seven"},
+            {8, "eight"},
+            {9, "nine"}
         };
 
         public string AverageString(string str)
