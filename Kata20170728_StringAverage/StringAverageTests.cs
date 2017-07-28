@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Kata20170728_StringAverage
@@ -72,35 +71,17 @@ namespace Kata20170728_StringAverage
 
     public class Kata
     {
-        private readonly Dictionary<string, int> dicStrToNum = new Dictionary<string, int>
-        {
-            {"zero", 0},
-            {"one", 1},
-            {"two", 2},
-            {"three", 3},
-            {"four", 4},
-            {"five", 5},
-            {"six", 6},
-            {"seven", 7},
-            {"eight", 8},
-            {"nine", 9}
-        };
+        private readonly string[] numbers = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
         public string AverageString(string str)
         {
             var strList = str.Split(' ');
-            if (!strList.All(dicStrToNum.ContainsKey))
+            if (!strList.All(numbers.Contains))
             {
                 return "n/a";
             }
 
-            var numberAverage = (int)strList.Select(s => dicStrToNum[s]).Average();
-            return ConvertNumber2String(numberAverage);
-        }
-
-        private string ConvertNumber2String(int numberAverage)
-        {
-            return dicStrToNum.FirstOrDefault(kv => kv.Value == numberAverage).Key;
+            return numbers[(int)strList.Select(s => Array.IndexOf(numbers, s)).Average()];
         }
     }
 }
