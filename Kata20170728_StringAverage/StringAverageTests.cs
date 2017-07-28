@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170728_StringAverage
@@ -21,6 +23,14 @@ namespace Kata20170728_StringAverage
             var actual = kata.AverageString("one one");
             Assert.AreEqual("one", actual);
         }
+
+        [TestMethod]
+        public void input_two_two_should_return_two()
+        {
+            var kata = new Kata();
+            var actual = kata.AverageString("two two");
+            Assert.AreEqual("two", actual);
+        }
     }
 
     public class Kata
@@ -32,7 +42,21 @@ namespace Kata20170728_StringAverage
                 return "n/a";
             }
 
-            return "one";
+            var strList = str.Split(' ');
+
+            var numList = ConvertStringList2NumberList(strList);
+
+            return NumberAverage(numList) == 1 ? "one" : "two";
+        }
+
+        private static int NumberAverage(List<int> numList)
+        {
+            return numList.Sum() / numList.Count;
+        }
+
+        private static List<int> ConvertStringList2NumberList(string[] strList)
+        {
+            return strList.Select(a => a == "one" ? 1 : 2).ToList();
         }
     }
 }
