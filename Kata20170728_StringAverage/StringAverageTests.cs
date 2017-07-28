@@ -89,24 +89,18 @@ namespace Kata20170728_StringAverage
         public string AverageString(string str)
         {
             var strList = str.Split(' ');
-            if (strList.Length == 0
-                || !strList.All(a => dicStrToNum.ContainsKey(a)))
+            if (!strList.All(dicStrToNum.ContainsKey))
             {
                 return "n/a";
             }
 
-            var numList = ConvertStringList2NumberList(strList);
-            return ConvertNumber2String((int)numList.Average());
+            var numberAverage = (int)strList.Select(s => dicStrToNum[s]).Average();
+            return ConvertNumber2String(numberAverage);
         }
 
         private string ConvertNumber2String(int numberAverage)
         {
             return dicStrToNum.FirstOrDefault(kv => kv.Value == numberAverage).Key;
-        }
-
-        private List<int> ConvertStringList2NumberList(string[] strList)
-        {
-            return strList.Select(str => dicStrToNum[str]).ToList();
         }
     }
 }
