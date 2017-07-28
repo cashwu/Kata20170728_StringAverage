@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,6 +56,12 @@ namespace Kata20170728_StringAverage
             AssertAverageStringShouldBe("one one eight one", "two");
         }
 
+        [TestMethod]
+        public void input_one_twnvyr_should_return_na()
+        {
+            AssertAverageStringShouldBe("one twnvyr", "n/a");
+        }
+
         private static void AssertAverageStringShouldBe(string str, string expected)
         {
             var kata = new Kata();
@@ -81,23 +88,20 @@ namespace Kata20170728_StringAverage
 
         public string AverageString(string str)
         {
-            if (string.IsNullOrEmpty(str))
+            var strList = str.Split(' ');
+            if (strList.Length == 0
+                || !strList.All(a => dicStrToNum.ContainsKey(a)))
             {
                 return "n/a";
             }
 
-            var numList = ConvertStringList2NumberList(str.Split(' '));
-            return ConvertNumber2String(NumberAverage(numList));
+            var numList = ConvertStringList2NumberList(strList);
+            return ConvertNumber2String((int)numList.Average());
         }
 
         private string ConvertNumber2String(int numberAverage)
         {
             return dicStrToNum.FirstOrDefault(kv => kv.Value == numberAverage).Key;
-        }
-
-        private int NumberAverage(List<int> numList)
-        {
-            return numList.Sum() / numList.Count;
         }
 
         private List<int> ConvertStringList2NumberList(string[] strList)
