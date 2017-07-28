@@ -24,19 +24,19 @@ namespace Kata20170728_StringAverage
         }
 
         [TestMethod]
-        public void input_two_two_should_return_two()
-        {
-            var kata = new Kata();
-            var actual = kata.AverageString("two two");
-            Assert.AreEqual("two", actual);
-        }
-
-        [TestMethod]
         public void input_zero_zero_should_return_zero()
         {
             var kata = new Kata();
             var actual = kata.AverageString("zero zero");
             Assert.AreEqual("zero", actual);
+        }
+
+        [TestMethod]
+        public void input_three_four_should_return_three()
+        {
+            var kata = new Kata();
+            var actual = kata.AverageString("three four");
+            Assert.AreEqual("three", actual);
         }
     }
 
@@ -46,14 +46,18 @@ namespace Kata20170728_StringAverage
         {
             {"zero", 0},
             {"one", 1},
-            {"two", 2}
+            {"two", 2},
+            {"three", 3},
+            {"four", 4}
         };
 
         private readonly Dictionary<int, string> dicNumToStr = new Dictionary<int, string>
         {
             {0, "zero"},
             {1, "one"},
-            {2, "two"}
+            {2, "two"},
+            {3, "three"},
+            {4, "four"}
         };
 
         public string AverageString(string str)
@@ -63,8 +67,7 @@ namespace Kata20170728_StringAverage
                 return "n/a";
             }
 
-            var strList = str.Split(' ');
-            var numList = ConvertStringList2NumberList(strList);
+            var numList = ConvertStringList2NumberList(str.Split(' '));
             var numberAverage = NumberAverage(numList);
             return dicNumToStr[numberAverage];
         }
