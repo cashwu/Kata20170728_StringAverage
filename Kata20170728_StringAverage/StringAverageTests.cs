@@ -64,20 +64,6 @@ namespace Kata20170728_StringAverage
             {"nine", 9}
         };
 
-        private readonly Dictionary<int, string> dicNumToStr = new Dictionary<int, string>
-        {
-            {0, "zero"},
-            {1, "one"},
-            {2, "two"},
-            {3, "three"},
-            {4, "four"},
-            {5, "five"},
-            {6, "six"},
-            {7, "seven"},
-            {8, "eight"},
-            {9, "nine"}
-        };
-
         public string AverageString(string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -86,8 +72,12 @@ namespace Kata20170728_StringAverage
             }
 
             var numList = ConvertStringList2NumberList(str.Split(' '));
-            var numberAverage = NumberAverage(numList);
-            return dicNumToStr[numberAverage];
+            return ConvertNumber2String(NumberAverage(numList));
+        }
+
+        private string ConvertNumber2String(int numberAverage)
+        {
+            return dicStrToNum.FirstOrDefault(kv => kv.Value == numberAverage).Key;
         }
 
         private int NumberAverage(List<int> numList)
