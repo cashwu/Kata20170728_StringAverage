@@ -10,65 +10,56 @@ namespace Kata20170728_StringAverage
         [TestMethod]
         public void input_empty_should_return_na()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("");
-            Assert.AreEqual("n/a", actual);
+            AssertAverageStringShouldBe("", "n/a");
         }
 
         [TestMethod]
         public void input_one_one_should_return_one()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("one one");
-            Assert.AreEqual("one", actual);
+            AssertAverageStringShouldBe("one one", "one");
         }
 
         [TestMethod]
         public void input_zero_zero_zero_zero_zero_should_return_zero()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("zero zero zero zero zero");
-            Assert.AreEqual("zero", actual);
+            AssertAverageStringShouldBe("zero zero zero zero zero", "zero");
         }
 
         [TestMethod]
         public void input_five_four_should_return_four()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("five four");
-            Assert.AreEqual("four", actual);
+            AssertAverageStringShouldBe("five four", "four");
         }
 
         [TestMethod]
         public void input_zero_nine_five_two_should_return_four()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("zero nine five two");
-            Assert.AreEqual("four", actual);
+            AssertAverageStringShouldBe("zero nine five two", "four");
         }
 
         [TestMethod]
         public void input_four_six_two_three_should_return_three()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("four six two three");
-            Assert.AreEqual("three", actual);
+            AssertAverageStringShouldBe("four six two three", "three");
         }
 
         [TestMethod]
         public void input_one_two_three_four_five_should_return_three()
         {
-            var kata = new Kata();
-            var actual = kata.AverageString("one two three four five");
-            Assert.AreEqual("three", actual);
+            AssertAverageStringShouldBe("one two three four five", "three");
         }
 
         [TestMethod]
         public void input_one_one_eight_one_should_return_two()
         {
+            AssertAverageStringShouldBe("one one eight one", "two");
+        }
+
+        private static void AssertAverageStringShouldBe(string str, string expected)
+        {
             var kata = new Kata();
-            var actual = kata.AverageString("one one eight one");
-            Assert.AreEqual("two", actual);
+            var actual = kata.AverageString(str);
+            Assert.AreEqual(expected, actual);
         }
     }
 
