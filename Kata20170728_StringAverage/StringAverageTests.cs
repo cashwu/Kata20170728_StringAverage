@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170728_StringAverage
 {
@@ -31,10 +30,32 @@ namespace Kata20170728_StringAverage
             var actual = kata.AverageString("two two");
             Assert.AreEqual("two", actual);
         }
+
+        [TestMethod]
+        public void input_zero_zero_should_return_zero()
+        {
+            var kata = new Kata();
+            var actual = kata.AverageString("zero zero");
+            Assert.AreEqual("zero", actual);
+        }
     }
 
     public class Kata
     {
+        private readonly Dictionary<string, int> dicStrToNum = new Dictionary<string, int>
+        {
+            {"zero", 0},
+            {"one", 1},
+            {"two", 2}
+        };
+
+        private readonly Dictionary<int, string> dicNumToStr = new Dictionary<int, string>
+        {
+            {0, "zero"},
+            {1, "one"},
+            {2, "two"}
+        };
+
         public string AverageString(string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -43,20 +64,19 @@ namespace Kata20170728_StringAverage
             }
 
             var strList = str.Split(' ');
-
             var numList = ConvertStringList2NumberList(strList);
-
-            return NumberAverage(numList) == 1 ? "one" : "two";
+            var numberAverage = NumberAverage(numList);
+            return dicNumToStr[numberAverage];
         }
 
-        private static int NumberAverage(List<int> numList)
+        private int NumberAverage(List<int> numList)
         {
             return numList.Sum() / numList.Count;
         }
 
-        private static List<int> ConvertStringList2NumberList(string[] strList)
+        private List<int> ConvertStringList2NumberList(string[] strList)
         {
-            return strList.Select(a => a == "one" ? 1 : 2).ToList();
+            return strList.Select(str => dicStrToNum[str]).ToList();
         }
     }
 }
